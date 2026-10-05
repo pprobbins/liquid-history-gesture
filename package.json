@@ -1,0 +1,16 @@
+{
+  "name": "liquid-history-gesture",
+  "version": "0.1.2",
+  "description": "Dependency-free liquid edge gestures for browser history on touch devices.",
+  "type": "module",
+  "license": "MIT",
+  "author": "pprobbins",
+  "repository": { "type": "git", "url": "https://github.com/pprobbins/liquid-history-gesture.git" },
+  "homepage": "https://github.com/pprobbins/liquid-history-gesture#readme",
+  "bugs": { "url": "https://github.com/pprobbins/liquid-history-gesture/issues" },
+  "exports": { ".": { "types": "./index.d.mts", "import": "./index.mjs" } },
+  "files": ["index.mjs", "index.d.mts", "README.md", "LICENSE"],
+  "scripts": { "test": "node --test test.mjs", "check": "node --check index.mjs" },
+  "engines": { "node": ">=20" },
+  "keywords": ["gesture", "swipe", "history", "navigation", "liquid", "touch", "mobile"]
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid History Gesture example</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100dvh; padding: 32px; font: 16px/1.6 system-ui, sans-serif; color: #18181b; background: #f3f4f6; }
+main { max-width: 620px; margin: 0 auto; }
+h1 { line-height: 1.2; }
+button { padding: 12px 18px; border: 1px solid #cfc4c5; border-radius: 12px; background: #C0FF00; color: #18181b; font: inherit; font-weight: 700; cursor: pointer; }
+button:focus-visible { outline: 3px solid #0349da; outline-offset: 3px; }
+output { display: block; margin: 24px 0; padding: 18px; background: white; border: 1px solid #cfc4c5; border-radius: 12px; font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+<h1>Liquid History Gesture</h1>
+<p>Try this on a phone, tablet or browser with touch emulation.</p>
+<ol>
+<li>Tap <strong>Add history entry</strong>.</li>
+<li>Swipe right from the left edge to go back.</li>
+<li>Swipe left from the right edge to go forward.</li>
+<li>At the newest entry, swipe from the right edge again to see the grey wave.</li>
+</ol>
+<button id="add" type="button" title="Add a browser history entry">Add history entry</button>
+<output id="entry" aria-live="polite"></output>
+<p>Short swipes retract. Vertical scrolling and ordinary taps remain available.</p>
+<p><a href="https://github.com/pprobbins/liquid-history-gesture" title="Read the setup instructions on GitHub">Setup instructions on GitHub</a></p>
+</main>
+<script type="module">
+import { mountLiquidHistoryGesture } from '../index.mjs';
+mountLiquidHistoryGesture({ backgroundColor: '#18181b', arrowColor: '#C0FF00' });
+const output = document.querySelector('#entry');
+const currentEntry = () => Number(history.state?.demoEntry) || 0;
+const render = () => { output.textContent = 'History entry: ' + currentEntry(); };
+document.querySelector('#add').addEventListener('click', () => {
+  const entry = currentEntry() + 1;
+  history.pushState({ ...history.state, demoEntry: entry }, '', '#entry-' + entry);
+  render();
+});
+window.addEventListener('popstate', render);
+render();
+</script>
+</body>
+</html>
